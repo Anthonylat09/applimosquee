@@ -20,7 +20,7 @@ public class Mosque {
     private String name;
 
     @Column(nullable = false)
-    private String location;
+    private Location location;
 
     private Map<Services, Boolean> services;
 
