@@ -1,12 +1,10 @@
 package com.antoine.mosqueapp.models;
 
 import com.antoine.mosqueapp.models.enums.Services;
-import com.antoine.mosqueapp.models.enums.Times;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name = "mosque")
@@ -19,15 +17,21 @@ public class Mosque {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-    private Map<Services, Boolean> services;
-
-    private Map<Times, LocalDateTime> times;
+    @ElementCollection
+    @CollectionTable(name = "mosque_services", joinColumns = @JoinColumn(name = "mosque_id"))
+    @MapKeyEnumerated(EnumType.STRING)
+    @Column(name = "available")
+    private Map<Services, Boolean> services = new HashMap<>();;
 
     @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments;
+    private Set<PrayerTime> prayerTimes = new HashSet<>();
+
+    @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
 
 }
