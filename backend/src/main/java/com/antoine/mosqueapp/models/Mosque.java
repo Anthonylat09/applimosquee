@@ -33,5 +33,51 @@ public class Mosque {
     @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Map<Services, Boolean> getServices() {
+        return services;
+    }
+
+    public void setServices(Map<Services, Boolean> services) {
+        this.services = services;
+    }
+
+    public Set<PrayerTime> getPrayerTimes() {
+        return prayerTimes;
+    }
+
+    public void setPrayerTimes(Set<PrayerTime> prayerTimes) {
+        this.prayerTimes = prayerTimes;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }

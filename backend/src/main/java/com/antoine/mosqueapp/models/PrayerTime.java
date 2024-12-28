@@ -24,4 +24,35 @@ public class PrayerTime {
     @JoinColumn(name = "mosque_id", nullable = false)
     private Mosque mosque;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Times getPrayer() {
+        return prayer;
+    }
+
+    public void setPrayer(Times prayer) {
+        this.prayer = prayer;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
+    public Mosque getMosque() {
+        return mosque;
+    }
+
+    public void setMosque(Mosque mosque) {
+        this.mosque = mosque;
+    }
 }
