@@ -4,6 +4,7 @@ import com.antoine.mosqueapp.models.PrayerTime;
 import com.antoine.mosqueapp.services.PrayerTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,11 +22,13 @@ public class PrayerTimeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<PrayerTime> createOrUpdatePrayerTime(@RequestBody PrayerTime prayerTime) {
         return ResponseEntity.ok(prayerTimeService.createOrUpdatePrayerTime(prayerTime));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deletePrayerTime(@PathVariable Long id) {
         prayerTimeService.deletePrayerTime(id);
         return ResponseEntity.noContent().build();

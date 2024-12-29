@@ -4,6 +4,7 @@ import com.antoine.mosqueapp.models.Mosque;
 import com.antoine.mosqueapp.services.MosqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,16 +29,19 @@ public class MosqueController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Mosque> createMosque(@RequestBody Mosque mosque) {
         return ResponseEntity.ok(mosqueService.createMosque(mosque));
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Mosque> updateMosque(@PathVariable Long id, @RequestBody Mosque mosque) {
         return ResponseEntity.ok(mosqueService.updateMosque(id, mosque));
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteMosque(@PathVariable Long id) {
         mosqueService.deleteMosque(id);
         return ResponseEntity.noContent().build();
