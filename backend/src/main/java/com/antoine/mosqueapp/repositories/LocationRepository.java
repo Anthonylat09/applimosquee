@@ -8,6 +8,4 @@ import java.util.List;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Long> {
-    // Ajouter des requêtes spécifiques pour des recherches géographiques
-    List<Location> findByCity(String city);
 }

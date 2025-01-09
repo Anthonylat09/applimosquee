@@ -2,4 +2,6 @@
 backend/src/main/resources/application.properties
 
 # Ignorer les fichiers spécifiques à IntelliJ IDEA
-backend/.idea/vcs.xml
+backend/.idea/
+backend/.idea/*
+backend/target/

@@ -1,13 +1,17 @@
 package com.antoine.mosqueapp.models;
 
 import com.antoine.mosqueapp.models.enums.Services;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
 @Table(name = "mosque")
+@EqualsAndHashCode(exclude = "location")
 public class Mosque {
 
     @Id
@@ -19,6 +23,7 @@ public class Mosque {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
+    @JsonManagedReference
     private Location location;
 
     @ElementCollection
@@ -28,9 +33,11 @@ public class Mosque {
     private Map<Services, Boolean> services = new HashMap<>();;
 
     @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<PrayerTime> prayerTimes = new HashSet<>();
 
     @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {

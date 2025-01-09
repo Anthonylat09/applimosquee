@@ -21,10 +21,6 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public List<Location> getLocationsByCity(String city) {
-        return locationRepository.findByCity(city);
-    }
-
     public void deleteLocation(Long id) {
         locationRepository.deleteById(id);
     }

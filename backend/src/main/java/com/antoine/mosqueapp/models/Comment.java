@@ -1,11 +1,15 @@
 package com.antoine.mosqueapp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comment")
+@EqualsAndHashCode
 public class Comment {
 
     @Id
@@ -20,6 +24,7 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "mosque_id", nullable = false)
+    @JsonBackReference
     private Mosque mosque;
 
     @ManyToOne

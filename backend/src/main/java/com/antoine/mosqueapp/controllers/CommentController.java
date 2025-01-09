@@ -22,13 +22,13 @@ public class CommentController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN, USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
         return ResponseEntity.ok(commentService.createComment(comment));
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN, USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.noContent().build();

@@ -1,13 +1,17 @@
 package com.antoine.mosqueapp.models;
 
 import com.antoine.mosqueapp.models.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
+@EqualsAndHashCode
 public class User {
 
     @Id
@@ -31,6 +35,7 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
 
     public Long getId() {

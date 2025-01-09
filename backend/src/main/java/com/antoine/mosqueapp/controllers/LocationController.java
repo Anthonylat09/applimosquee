@@ -20,11 +20,6 @@ public class LocationController {
         return ResponseEntity.ok(locationService.getAllLocations());
     }
 
-    @GetMapping("/city/{city}")
-    public ResponseEntity<List<Location>> getLocationsByCity(@PathVariable String city) {
-        return ResponseEntity.ok(locationService.getLocationsByCity(city));
-    }
-
     @PostMapping
     public ResponseEntity<Location> createLocation(@RequestBody Location location) {
         return ResponseEntity.ok(locationService.createLocation(location));

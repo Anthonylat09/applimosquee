@@ -1,9 +1,12 @@
 package com.antoine.mosqueapp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "location")
+@EqualsAndHashCode(exclude = "mosque")
 public class Location {
 
     @Id
@@ -18,7 +21,8 @@ public class Location {
 
     private String address;
 
-    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "location")
+    @JsonBackReference
     private Mosque mosque;
 
     public Long getId() {

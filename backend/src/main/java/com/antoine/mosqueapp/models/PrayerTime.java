@@ -2,11 +2,14 @@ package com.antoine.mosqueapp.models;
 
 import com.antoine.mosqueapp.models.enums.Times;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
+@Table(name = "prayer_time")
+@EqualsAndHashCode
 public class PrayerTime {
 
     @Id

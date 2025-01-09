@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
@@ -39,12 +41,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Disable CSRF (optional, based on your requirements)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/**").permitAll() // Allow public access to these endpoints
+                        .anyRequest().authenticated() // Require authentication for all other endpoints
+                )
+                .httpBasic(withDefaults()) // Enable HTTP Basic Authentication
                 .formLogin(formLogin -> formLogin
-                        .loginPage("/login").permitAll()
+                        .loginPage("/login").permitAll() // Customize the login page
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout").permitAll()
+                        .logoutUrl("/logout").permitAll() // Customize the logout URL
                 );
         return http.build();
     }
