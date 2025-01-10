@@ -21,7 +21,7 @@ public class Location {
 
     private String address;
 
-    @OneToOne(mappedBy = "location")
+    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private Mosque mosque;
 

@@ -21,7 +21,7 @@ public class Mosque {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     @JsonManagedReference
     private Location location;
@@ -39,6 +39,14 @@ public class Mosque {
     @OneToMany(mappedBy = "mosque", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Comment> comments = new ArrayList<>();
+
+    public Mosque() {
+
+    }
+
+    public Mosque(String name) {
+        this.name = name;
+    }
 
     public Long getId() {
         return id;
