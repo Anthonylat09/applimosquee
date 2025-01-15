@@ -25,6 +25,16 @@ public class Location {
     @JsonBackReference
     private Mosque mosque;
 
+    public Location() {
+    }
+
+    public Location(Long id, double latitude, double longitude, String address) {
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

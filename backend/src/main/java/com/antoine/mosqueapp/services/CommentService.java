@@ -6,11 +6,13 @@ import com.antoine.mosqueapp.models.User;
 import com.antoine.mosqueapp.repositories.CommentRepository;
 import com.antoine.mosqueapp.repositories.MosqueRepository;
 import com.antoine.mosqueapp.repositories.UserRepository;
+import com.antoine.mosqueapp.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,7 +34,7 @@ public class CommentService {
 
     public Comment createComment(Comment comment) {
         // Get the authenticated user's email from the SecurityContext
-        String email = getCurrentAuthenticatedUserEmail();
+        String email = SecurityUtils.getCurrentAuthenticatedUserEmail();
 
         // Find the User entity from the database
         User user = userRepository.findByEmail(email)
@@ -48,18 +50,11 @@ public class CommentService {
         // Set the mosque in the comment
         comment.setMosque(mosque);
 
+        // Set the current date and time as the creation date
+        comment.setCreationDate(LocalDateTime.now());
+
         // Save and return the comment
         return commentRepository.save(comment);
-    }
-
-    // Helper method to get the authenticated user's email
-    private String getCurrentAuthenticatedUserEmail() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((UserDetails) principal).getUsername();
-        } else {
-            return principal.toString();
-        }
     }
 
     public void deleteComment(Long id) {
