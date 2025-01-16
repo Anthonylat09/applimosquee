@@ -5,3 +5,8 @@ backend/src/main/resources/application.properties
 backend/.idea/
 backend/.idea/*
 backend/target/
+
+frontend/.expo/
+frontend/.expo/*
+frontend/.gitignore
+frontend/node_modules/
