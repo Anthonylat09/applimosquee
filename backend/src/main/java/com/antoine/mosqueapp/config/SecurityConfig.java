@@ -43,7 +43,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF (optional, based on your requirements)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll() // Allow public access to these endpoints
+                        .requestMatchers("/api/**", "/swagger-ui.html", "/api-docs/**", "/swagger-ui/**").permitAll() // Allow public access to these endpoints
                         .anyRequest().authenticated() // Require authentication for all other endpoints
                 )
                 .httpBasic(withDefaults()) // Enable HTTP Basic Authentication
