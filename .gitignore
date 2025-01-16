@@ -1,0 +1,7 @@
+# Ignorer les propriétés de l'application
+backend/src/main/resources/application.properties
+
+# Ignorer les fichiers spécifiques à IntelliJ IDEA
+backend/.idea/
+backend/.idea/*
+backend/target/
