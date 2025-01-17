@@ -14,7 +14,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: '#FFD54F', // Active color
+        tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].tint, // Default color for inactive tabs
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -25,19 +26,45 @@ export default function TabLayout() {
           },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Carte',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol
+              size={28}
+              name="map.fill"
+              color={focused ? '#FFD54F' : Colors[colorScheme ?? 'light'].tint} // Active and inactive colors
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Favoris',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol
+              size={28}
+              name="star.fill"
+              color={focused ? '#FFD54F' : Colors[colorScheme ?? 'light'].tint} // Active and inactive colors
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profil',
+          tabBarIcon: ({ focused }) => (
+            <IconSymbol
+              size={28}
+              name="person.fill"
+              color={focused ? '#FFD54F' : Colors[colorScheme ?? 'light'].tint} // Active and inactive colors
+            />
+          ),
         }}
       />
     </Tabs>
