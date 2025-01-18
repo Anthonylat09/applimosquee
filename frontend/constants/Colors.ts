@@ -5,6 +5,13 @@
 
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
+const greenPrimary = '#4CAF50'; // Vert principal - For buttons and key elements
+const greenLight = '#A5D6A7'; // Vert clair - Hover and light background
+const greenDark = '#2E7D32'; // Vert foncé - Main text and accents
+const offWhite = '#F9FBE7'; // Blanc cassé - General background
+const softGray = '#BDBDBD'; // Gris doux - Secondary text
+const lightGold = '#FFD54F'; // Doré clair - Spiritual details
+const pastelBlue = '#81D4FA'; // Bleu pastel - Soft contrast
 
 export const Colors = {
   light: {
@@ -14,6 +21,12 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    primaryButton: greenPrimary,
+    primaryHover: greenLight,
+    primaryText: greenDark,
+    secondaryText: softGray,
+    spiritualAccent: lightGold,
+    contrastSoft: pastelBlue,
   },
   dark: {
     text: '#ECEDEE',
@@ -22,5 +35,11 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    primaryButton: greenPrimary,
+    primaryHover: greenLight,
+    primaryText: greenDark,
+    secondaryText: softGray,
+    spiritualAccent: lightGold,
+    contrastSoft: pastelBlue,
   },
 };
