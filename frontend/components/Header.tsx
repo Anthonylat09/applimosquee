@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center vertically
   },
   logo: {
-    width: 30, // Adjust based on your logo size
-    height: 30, // Adjust based on your logo size
+    width: 40, // Adjust based on your logo size
+    height: 35, // Adjust based on your logo size
     marginRight: 8, // Space between logo and text
   },
   title: {
