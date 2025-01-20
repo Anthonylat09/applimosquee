@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import Separator from './ui/Separator'; // Import the Separator component
+import {HorizontalSeparator} from './ui/Separator'; // Import the Separator component
 
 type AccountInfoElementProps = {
     value: string; // The value to display (e.g., name or information)
@@ -16,7 +16,7 @@ const AccountInfoElement: React.FC<AccountInfoElementProps> = ({ value }) => {
                     style={styles.icon}
                 />
             </View>
-            <Separator />
+            <HorizontalSeparator/>
         </View>
     );
 };
