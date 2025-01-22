@@ -3,11 +3,12 @@ import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-
 
 type AuthenticationElementProps = {
     name: string; // Button label, e.g., "Connexion" or "Inscription"
+    onPress?: () => void; // Optional callback when the button is pressed
 };
 
-const AuthenticationElement: React.FC<AuthenticationElementProps> = ({ name }) => {
+const AuthenticationElement: React.FC<AuthenticationElementProps> = ({ name, onPress }) => {
     return (
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
             <Text style={styles.buttonText}>{name}</Text>
         </TouchableOpacity>
     );
