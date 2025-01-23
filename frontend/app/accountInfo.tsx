@@ -20,9 +20,12 @@ const AccountInfo: React.FC = () => {
 
             {/* Content */}
             <ScrollView>
-                <AccountInfoElement value="Nom" />
-                <AccountInfoElement value="Adresse email" />
-                <AccountInfoElement value="Mot de passe" />
+                <AccountInfoElement value="Nom"
+                                    route="/editName" />
+                <AccountInfoElement value="Adresse email" 
+                                    route="/editEmail"/>
+                <AccountInfoElement value="Mot de passe" 
+                                    route="/editPassword"/>
             </ScrollView>
         </View>
     );

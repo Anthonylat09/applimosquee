@@ -1,22 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import {HorizontalSeparator} from './ui/Separator'; // Import the Separator component
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { HorizontalSeparator } from './ui/Separator'; // Import the Separator component
+import { useRouter } from 'expo-router';
 
 type AccountInfoElementProps = {
     value: string; // The value to display (e.g., name or information)
+    route: '/editName' | '/editEmail' | '/editPassword'; // Valid routes
 };
 
-const AccountInfoElement: React.FC<AccountInfoElementProps> = ({ value }) => {
+const AccountInfoElement: React.FC<AccountInfoElementProps> = ({ value, route }) => {
+    const router = useRouter();
+
     return (
         <View>
-            <View style={styles.container}>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={() => router.push(route)} // Navigate to the route
+            >
                 <Text style={styles.text}>{value}</Text>
                 <Image
                     source={require('../assets/icons/pencil.png')} // Replace with your actual edit icon path
                     style={styles.icon}
                 />
-            </View>
-            <HorizontalSeparator/>
+            </TouchableOpacity>
+            <HorizontalSeparator />
         </View>
     );
 };
@@ -29,7 +36,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#A5D6A7',
         paddingHorizontal: 10,
         height: 50,
-
     },
     text: {
         fontSize: 16,
