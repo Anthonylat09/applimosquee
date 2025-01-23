@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
                     <ProfileElement
                         name="Mon Compte"
                         icon="person.fill" // Replace with the correct icon name
-                        onPress={() => console.log('Mon Compte pressed')}
+                        onPress={() => router.push('/accountInfo')}
                     />
                     <ProfileElement
                         name="Paramètres"
