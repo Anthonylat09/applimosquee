@@ -37,6 +37,7 @@ export default function RootLayout() {
         <Stack.Screen name="editName" options={{ headerShown: false }}/>
         <Stack.Screen name="editEmail" options={{ headerShown: false }}/>
         <Stack.Screen name="editPassword" options={{ headerShown: false }}/>
+        <Stack.Screen name="favMosque" options={{ headerShown: false }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -27,10 +27,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        height:42,
-        backgroundColor: '#fff',
+        height:35,
     },
     prayerName: {
         fontSize: 16,

@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         borderRadius: 10, // Rounded corners
         padding: 15, // Padding inside the container for child components
         justifyContent: 'center', // Center child components vertically
-        alignItems: 'center', // Center child components horizontally
         shadowColor: '#000', // Optional: Add a shadow for better appearance
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
