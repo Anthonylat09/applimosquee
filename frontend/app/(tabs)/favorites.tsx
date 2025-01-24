@@ -36,16 +36,19 @@ const Favorites: React.FC = () => {
     if (!isAuthenticated) {
         // Render this if the user is not authenticated
         return (
-            <View style={styles.container}>
-                <Text style={styles.message}>
-                    Vous pouvez avoir des mosquées favorites uniquement si vous avez un compte.
-                </Text>
-                <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => router.push('/register')}
-                >
-                    <Text style={styles.registerButtonText}>Créer un compte</Text>
-                </TouchableOpacity>
+            <View style={styles.notAuthenticatedContainer}>
+                <Header />
+                <View style={styles.notAuthenticatedContent}>
+                    <Text style={styles.message}>
+                        Vous pouvez avoir des mosquées favorites uniquement si vous avez un compte.
+                    </Text>
+                    <TouchableOpacity
+                        style={styles.registerButton}
+                        onPress={() => router.push('/register')}
+                    >
+                        <Text style={styles.registerButtonText}>Créer un compte</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -98,23 +101,39 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#000',
     },
+    notAuthenticatedContainer: {
+        flex: 1,
+        backgroundColor: '#F5F5F5',
+    },
+    notAuthenticatedContent: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+    },
     message: {
         fontSize: 16,
-        textAlign: 'center',
         color: '#000',
+        textAlign: 'center',
         marginBottom: 20,
+        lineHeight: 24, // For better readability
     },
     registerButton: {
         backgroundColor: '#4CAF50',
         borderRadius: 10,
-        height: 45,
+        height: 50,
         width: '80%',
         justifyContent: 'center',
         alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 5, // For Android shadow
     },
     registerButtonText: {
         color: '#FFFFFF',
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
     },
     noFavoritesMessage: {
