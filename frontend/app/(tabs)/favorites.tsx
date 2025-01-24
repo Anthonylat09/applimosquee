@@ -62,21 +62,11 @@ const Favorites: React.FC = () => {
                     data={favMosques}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
-                        <TouchableOpacity
-                            onPress={() => router.push({
-                                pathname: '/favMosque',
-                                params: {
-                                    mosqueName: item.mosqueName,
-                                    mosqueAddress: item.mosqueAddress,
-                                },
-                            })}
-                        >
                         <FavMosqueCard
                         mosqueName={item.mosqueName}
                         mosqueAddress={item.mosqueAddress} 
                         mosqueId={item.id}                        
                         />
-                        </TouchableOpacity>
                     )}
                 />
             ) : (

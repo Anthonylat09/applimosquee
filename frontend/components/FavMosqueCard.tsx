@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import navigation hook
+import { useRouter } from 'expo-router';
 
 type FavMosqueCardProps = {
     mosqueName: string; // Name of the mosque
@@ -10,14 +11,12 @@ type FavMosqueCardProps = {
 };
 
 const FavMosqueCard: React.FC<FavMosqueCardProps> = ({ mosqueName, mosqueAddress, mosqueImage, mosqueId }) => {
-    const navigation = useNavigation(); // Initialize navigation
-    /*
+    const router = useRouter()
     const handlePress = () => {
-        navigation.navigate('MosqueDetails', { mosqueId }); // Navigate to MosqueDetails screen with mosqueId
+        router.push('/favMosque') // Navigate to MosqueDetails screen with mosqueId
     };
-    */
     return (
-        <TouchableOpacity style={styles.container} /*onPress={handlePress}*/>
+        <TouchableOpacity style={styles.container} onPress={handlePress} /*onPress={handlePress}*/>
             {/* Mosque Image */}
             <View style={styles.imageContainer}>
                 {mosqueImage ? (
