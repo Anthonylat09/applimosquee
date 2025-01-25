@@ -1,7 +1,6 @@
 package com.antoine.mosqueapp.config;
 
 import com.antoine.mosqueapp.services.CustomUserDetailsService;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -20,9 +20,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     private final CustomUserDetailsService userDetailsService;
+    private final JwtTokenProvider jwtTokenProvider; // Inject JwtTokenProvider
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(CustomUserDetailsService userDetailsService, JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     // Password encoder bean
@@ -37,22 +39,30 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
+    // Register JwtAuthenticationFilter as a Spring Bean
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService);
+    }
+
     // SecurityFilterChain to configure HttpSecurity
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF (optional, based on your requirements)
+                .csrf(csrf -> csrf.disable()) // Disable CSRF (not needed for token-based auth)
+                .cors(withDefaults()) // Enable CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**", "/swagger-ui.html", "/api-docs/**", "/swagger-ui/**").permitAll() // Allow public access to these endpoints
-                        .anyRequest().authenticated() // Require authentication for all other endpoints
+                        .requestMatchers(
+                                "/api/**",
+                                "/api/auth/**", // Authentication endpoints (login/register)
+                                "/swagger-ui.html",
+                                "/v3/api-docs/**", // Swagger API docs
+                                "/swagger-ui/**"
+                        ).permitAll() // Public endpoints
+                        .anyRequest().authenticated() // All other endpoints require authentication
                 )
-                .httpBasic(withDefaults()) // Enable HTTP Basic Authentication
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login").permitAll() // Customize the login page
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout").permitAll() // Customize the logout URL
-                );
+                .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // Add JWT filter
+
         return http.build();
     }
 
